@@ -1,0 +1,80 @@
+{
+  "description": "package image for {{ user `role_name` }}",
+  "variables": {
+    "build_ts": "{{ timestamp }}",
+
+    "project_name": "",
+    "role_name": "",
+    "remote_user": "",
+    "region_name": "",
+    "instance_type": "",
+    "ami_desc": "",
+    "ami_owner": "",
+    "volume_type": "",
+    "volume_size": "",
+    "ansible_dir_path": "",
+
+    "public_key": "",
+    "private_key": "",
+    "vpc_id": "",
+    "subnet_id": ""
+  },
+  "builders": [
+    {
+      "type": "amazon-ebs",
+      "name": "ebs-{{ user `project_name` }}-{{ user `role_name` }}",
+      "associate_public_ip_address": true,
+
+      "source_ami_filter": {
+        "filters": {
+          "root-device-type": "ebs",
+          "description": "{{ user `ami_desc` }}"
+        },
+        "owners": [
+          "{{ user `ami_owner` }}"
+        ],
+        "most_recent": true
+      },
+      "instance_type": "{{ user `instance_type` }}",
+      "ssh_username": "{{ user `remote_user` }}",
+      "ssh_keypair_name": "{{ user `public_key` }}",
+      "ssh_private_key_file": "{{ user `private_key` }}",
+      "ami_name": "{{ user `project_name` }}/{{ user `role_name` }}_{{ user `build_ts` }}",
+
+      "vpc_id": "{{ user `vpc_id` }}",
+      "subnet_id": "{{ user `subnet_id` }}",
+      "ami_description": "{{ user `project_name` }}/{{ user `role_name` }}_{{ user `build_ts` }} AMI",
+
+      "launch_block_device_mappings": [
+        {
+          "device_name": "/dev/sda1",
+          "volume_type": "{{ user `vol_type` }}",
+          "volume_size": "{{ user `vol_size` }}",
+          "delete_on_termination": true
+        }
+      ]
+     }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "script": "scripts/wait-cloud-init-complete.sh"
+    },
+    {
+      "type": "ansible",
+
+      "user": "{{ user `remote_user` }}",
+      "extra_arguments": [
+        "--tags", "packer-imaging",
+        "--extra-vars", "remote_user={{ user `remote_user` }}",
+        "--extra-vars", "role_name={{ user `role_name` }}"
+      ],
+      "galaxy_file": "{{ user `ansible_dir_path` }}/ansible/galaxy-requirements.yml",
+      "playbook_file": "{{ user `ansible_dir_path` }}/ansible/packer-imaging_{{ user `role_name` }}.yml"
+    },
+    {
+      "type": "shell",
+      "script": "scripts/doing-something.sh"
+    }
+  ]
+}
