@@ -1,0 +1,84 @@
+{
+  "description": "package image for {{ user `role_name` }}",
+  "variables": {
+    "build_ts": "{{ timestamp }}",
+
+    "project_name": "packer-demo",
+    "role_name": "web",
+    "packer_remote_user": "ubuntu",
+    "region_name": "us-west-2",
+    "instance_type": "t3.micro",
+    "ami_desc": "Canonical, Ubuntu, 18.04 LTS*",
+    "ami_owner": "099720109477",
+    "volume_type": "gp2",
+    "volume_size": "20",
+    "ansible_dir_path": "../..",
+
+    "public_key": "packer-key",
+    "private_key": "./keys/packer_id_rsa",
+    "vpc_id": "vpc-06ebf06afcd2c979f",
+    "subnet_id": "subnet-0c2510d9fab267398",
+    "security_group_id":"sg-0b6d45827cf10d86d"
+  },
+  "builders": [
+    {
+      "type": "amazon-ebs",
+      "name": "ebs-{{ user `project_name` }}-{{ user `role_name` }}",
+      "associate_public_ip_address": true,
+
+      "source_ami_filter": {
+        "filters": {
+          "root-device-type": "ebs",
+          "architecture": "x86_64",
+          "description": "{{ user `ami_desc` }}"
+        },
+        "owners": [
+          "{{ user `ami_owner` }}"
+        ],
+        "most_recent": true
+      },
+      "instance_type": "{{ user `instance_type` }}",
+      "ssh_username": "{{ user `packer_remote_user` }}",
+      "ssh_keypair_name": "{{ user `public_key` }}",
+      "ssh_private_key_file": "{{ user `private_key` }}",
+      "ami_name": "{{ user `project_name` }}-{{ user `role_name` }}_{{ user `build_ts` }}",
+      "security_group_id": "{{ user `security_group_id` }}",
+
+      "vpc_id": "{{ user `vpc_id` }}",
+      "subnet_id": "{{ user `subnet_id` }}",
+      "ami_description": "{{ user `project_name` }}-{{ user `role_name` }}_{{ user `build_ts` }} AMI",
+
+      "launch_block_device_mappings": [
+        {
+          "device_name": "/dev/sda1",
+          "volume_type": "{{ user `volume_type` }}",
+          "volume_size": "{{ user `volume_size` }}",
+          "delete_on_termination": true
+        }
+      ]
+     }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "script": "scripts/wait-cloud-init-complete.sh"
+    },
+    {
+      "type": "ansible",
+
+      "user": "{{ user `packer_remote_user` }}",
+      "extra_arguments": [
+        "--tags", "packer-imaging",
+        "--extra-vars", "ansible_python_interpreter='/usr/bin/env python3'",
+        "--extra-vars", "packer_remote_user={{ user `packer_remote_user` }}",
+        "--extra-vars", "role_name={{ user `role_name` }}"
+      ],
+      "galaxy_file": "{{ user `ansible_dir_path` }}/ansible/galaxy-requirements.yml",
+      "playbook_file": "{{ user `ansible_dir_path` }}/ansible/packer-imaging_{{ user `role_name` }}.yml"
+    },
+    {
+      "type": "shell",
+      "script": "scripts/doing-something.sh"
+    }
+  ]
+}

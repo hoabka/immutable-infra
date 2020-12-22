@@ -1,0 +1,11 @@
+---
+
+- name: Packaging image
+  import_tasks: packer-imaging.yml
+  tags:
+    - packer-imaging
+
+- name: deployment
+  import_tasks: deployment.yml
+  tags:
+    - deployments
