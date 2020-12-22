@@ -9,8 +9,6 @@ pipeline {
 
   agent {
     dockerfile {
-      label "packer-demo"
-
       additionalBuildArgs '${DOCKER_NO_CACHE} --tag "packer-demo/jenkins-agent:${IMG_LABEL}" --build-arg "TERRAFORM_VERSION=${TERRAFORM_VERSION}" --build-arg "PACKER_VERSION=${PACKER_VERSION}"'
     }
   }
