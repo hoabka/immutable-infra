@@ -3,6 +3,8 @@
 set -o errexit
 set -o pipefail
 function build_image() {
+    local role_name=$1
+    export ROLE_NAME=${role_name}
     #Inspect script
     packer \
     inspect \
@@ -23,5 +25,5 @@ function build_image() {
     ;
 }
 
-echo $ROLE_NAME
-build_image
+echo $1
+build_image $1
