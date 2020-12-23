@@ -3,7 +3,8 @@
 set -o errexit
 set -o pipefail
 function build_image() {
-    export role_name=$1
+    export ROLE_NAME=$1
+    echo ${ROLE_NAME}
     #Inspect script
     packer \
     inspect \
@@ -19,10 +20,10 @@ function build_image() {
     #Packaging image
     packer \
     build \
-      -debug \
       -var-file "variables.json" \
       packer.json \
+      -debug       \
     ;
 }
-
+echo $1
 build_image $1
