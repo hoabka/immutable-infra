@@ -9,7 +9,7 @@ pipeline {
 
   agent {
     dockerfile {
-      additionalBuildArgs '${DOCKER_NO_CACHE} --tag "packer-demo/jenkins-agent:${IMG_LABEL}" --build-arg "TERRAFORM_VERSION=${TERRAFORM_VERSION}" --build-arg "PACKER_VERSION=${PACKER_VERSION}"'
+      additionalBuildArgs '${DOCKER_NO_CACHE} --tag "packer-demo/jenkins-agent:${IMG_LABEL}" --build-arg "TERRAFORM_VERSION=${TERRAFORM_VERSION}" --build-arg "PACKER_VERSION=${PACKER_VERSION}" --build-arg "USER_ID=$(user_id="$(id --user)"; [[ "${user_id}" == 0 ]] && echo "1000" || echo "${user_id}")" --build-arg "GROUP_ID=$(group_id="$(id --group)"; [[ "${group_id}" == 0 ]] && echo "1000" || echo "${group_id}")"'
     }
   }
   triggers {
