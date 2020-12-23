@@ -64,19 +64,6 @@
       "script": "scripts/wait-cloud-init-complete.sh"
     },
     {
-      "type": "ansible",
-
-      "user": "{{ user `packer_remote_user` }}",
-      "extra_arguments": [
-        "--tags", "packer-imaging",
-        "--extra-vars", "ansible_python_interpreter='/usr/bin/env python3'",
-        "--extra-vars", "packer_remote_user={{ user `packer_remote_user` }}",
-        "--extra-vars", "role_name={{ user `role_name` }}"
-      ],
-      "galaxy_file": "{{ user `ansible_dir_path` }}/ansible/galaxy-requirements.yml",
-      "playbook_file": "{{ user `ansible_dir_path` }}/ansible/packer-imaging_web.yml"
-    },
-    {
       "type": "shell",
       "script": "scripts/doing-something.sh"
     }
