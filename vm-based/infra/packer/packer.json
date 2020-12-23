@@ -46,7 +46,7 @@
 
       "vpc_id": "{{ user `vpc_id` }}",
       "subnet_id": "{{ user `subnet_id` }}",
-      "ami_description": "{{ user `project_name` }}-{{ user `role_name` }}_{{ user `build_ts` }} AMI",
+      "ami_description": "{{ user `project_name` }}-{{ user `role_name` }}_{{ user `region_name` }}_{{ user `build_ts` }} AMI",
 
       "launch_block_device_mappings": [
         {
