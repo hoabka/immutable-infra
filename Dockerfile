@@ -11,14 +11,38 @@ ENV ENV_PACKER_VERSION=${PACKER_VERSION}
 
 RUN apt-get update --yes && \
     apt-get install --yes \
+      coreutils \
       curl \
+      direnv \
+      expect \
+      gawk \
+      git \
+      groff \
+      less \
+      lsb-release \
+      moreutils \
+      parallel \
       python3-pip \
       unzip \
       wget \
     && rm --recursive --force /var/lib/apt/lists/*
 
 RUN pip3 install --upgrade \
-  ansible;
+  ansible \
+  awscli \
+  bashplotlib \
+  csvkit \
+  httpie \
+  jinja2 \
+  matplotlib \
+  netaddr \
+  pandas \
+  pip \
+  python-dateutil \
+  pywinrm \
+  virtualenv \
+  virtualenvwrapper \
+  ;
 
 RUN apt-get clean --yes \
   && rm --recursive --force /var/lib/apt/lists/*
