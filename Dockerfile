@@ -1,4 +1,3 @@
-
 FROM ubuntu:18.04
 
 ARG TERRAFORM_VERSION=0.12.24
@@ -45,3 +44,10 @@ RUN unzip "packer_${ENV_PACKER_VERSION}_linux_amd64.zip" \
 RUN chmod +x packer
 RUN mv packer /usr/local/bin
 
+RUN groupadd --gid "${GROUP_ID}" users || true
+RUN useradd --create-home --uid "${USER_ID}" --shell /bin/sh --gid users packer-user || true
+
+USER packer-user
+
+WORKDIR /home/packer-user
+RUN mkdir --parents .ssh/
