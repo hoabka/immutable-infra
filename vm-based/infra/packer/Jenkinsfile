@@ -19,7 +19,7 @@ pipeline {
   environment {
     AWS_ACCESS_KEY_ID     = credentials('PACKER_AWS_ACCESS_KEY')
     AWS_SECRET_ACCESS_KEY = credentials('PACKER_AWS_SECRET_KEY')
-    WORK_SUB_DIR          = 'vm-based/packer'
+    WORK_SUB_DIR          = 'vm-based/infra/packer'
     JENKINS_USER_ID       = 'user'
     JENKINS_API_TOKEN     = credentials('JENKIN_API_TOKEN')
   }
