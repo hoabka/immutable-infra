@@ -83,8 +83,6 @@ pipeline {
         sh '''#!/usr/bin/env bash
           echo "Shell Process ID: $$"
           set -o errexit
-          export ANSIBLE_REMOTE_TMP=${PACKER_HOME}/.ansible/tmp
-          ansible -v
           readonly ROLE_LIST=(
             web
           )
