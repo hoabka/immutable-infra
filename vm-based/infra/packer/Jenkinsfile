@@ -86,7 +86,7 @@ pipeline {
             ls -al .
             cat variables.json
             export ROLE_NAME="${role_name}"
-            scripts/packer-build.sh $ROLE_NAME
+            bash scripts/packer-build.sh $ROLE_NAME
             echo $ROLE_NAME 
           done
         '''
@@ -99,7 +99,7 @@ pipeline {
       sh '''#!/usr/bin/env bash
         echo "Shell Process ID: $$"
         cd "${WORK_SUB_DIR}"
-        scripts/post-cleanup.sh
+        bash scripts/post-cleanup.sh
       '''
     }
   }
