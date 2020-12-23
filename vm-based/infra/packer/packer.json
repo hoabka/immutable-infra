@@ -25,7 +25,7 @@
       "type": "amazon-ebs",
       "name": "ebs-{{ user `project_name` }}-{{ user `security_group_id` }}-{{ user `role_name` }}",
       "associate_public_ip_address": true,
-      "skip_region_validation": false,
+      "region": " user `region_name` ",
 
       "source_ami_filter": {
         "filters": {
