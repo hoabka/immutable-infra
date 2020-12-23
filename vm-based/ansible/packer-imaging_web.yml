@@ -4,7 +4,7 @@
   hosts: all
   gather_facts: yes
   become: true
-  remote_user: '{{ remote_user }}'
+  remote_user: '{{ packer_remote_user }}'
 
   tasks:
     - name: include packer-imaging roles
