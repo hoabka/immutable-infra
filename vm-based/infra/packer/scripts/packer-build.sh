@@ -19,6 +19,7 @@ function build_image() {
     #Packaging image
     packer \
     build \
+      -debug \
       -var-file "variables.json" \
       packer.json \
     ;
