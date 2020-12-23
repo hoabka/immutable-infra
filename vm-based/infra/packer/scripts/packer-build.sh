@@ -12,7 +12,7 @@ function build_image() {
     packer validate -var-file variables.json packer.json
     
     #Packaging image
-    packer build -var-file variables.json packer.json -debug
+    packer build -debug -var-file variables.json packer.json
 }
 echo $1
 build_image $1
