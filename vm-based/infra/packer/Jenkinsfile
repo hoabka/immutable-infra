@@ -87,7 +87,7 @@ pipeline {
             ls -al .
             cat variables.json
             export ROLE_NAME="${role_name}"
-            bash scripts/packer-build.sh $ROLE_NAME
+            bash scripts/packer-build.sh
             echo $ROLE_NAME 
           done
         '''
