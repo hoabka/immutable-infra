@@ -4,7 +4,7 @@
     "build_ts": "{{ timestamp }}",
 
     "project_name": "packer-demo",
-    "role_name": "{{env `role_name`}}",
+    "role_name": "{{ env `role_name` }}",
     "packer_remote_user": "",
     "region_name": "",
     "instance_type": "",
