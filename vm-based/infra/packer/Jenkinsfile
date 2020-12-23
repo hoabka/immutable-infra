@@ -52,49 +52,14 @@ pipeline {
       description: 'packer version'
     )
   }
-
-  stages {
-    stage('terraform-apply') {
-      options {
-        timeout(time: 10, unit: 'MINUTES')
-      }
-
-      steps {
-        sh '''#!/usr/bin/env bash
-          echo "Shell Process ID: $$"
-          cd "${WORK_SUB_DIR}"
-          bash scripts/tf-apply.bash
-        '''
-      }
+    stages {
+        stage('Test') {
+            steps {
+                sh '''#!/usr/bin/env bash
+                packer -v
+                terraform -v
+                  '''
+            }
+        }
     }
-
-    stage('packaging-image') {
-      options {
-        timeout(time: 150, unit: 'MINUTES')
-      }
-
-      steps {
-        sh '''#!/usr/bin/env bash
-          set -o errexit
-          readonly ROLE_LIST=(
-            web
-          )
-          for role_name in "${ROLE_LIST[@]}"
-          do
-            export ROLE_NAME="${role_name}"
-            bash scripts/packer-build.sh
-          done
-        '''
-      }
-    }
-  }
-
-  post {
-    cleanup {
-      sh '''#!/usr/bin/env bash
-        echo "Shell Process ID: $$"
-        bash scripts/post-cleanup.sh
-      '''
-    }
-  }
 }
