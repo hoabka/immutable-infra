@@ -63,6 +63,7 @@ pipeline {
         sh '''#!/usr/bin/env bash
           echo "Shell Process ID: $$"
           cd "${WORK_SUB_DIR}"
+          sed -i 's/\r$//' scripts/*
           bash scripts/tf-apply.bash
         '''
       }
@@ -82,6 +83,8 @@ pipeline {
           cd "${WORK_SUB_DIR}"
           for role_name in "${ROLE_LIST[@]}"
           do
+            ls -al .
+            cat variables.json
             export ROLE_NAME="${role_name}"
             bash scripts/packer-build.sh
           done
