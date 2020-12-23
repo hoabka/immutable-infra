@@ -23,4 +23,5 @@ function build_image() {
     ;
 }
 
+echo $ROLE_NAME
 build_image
