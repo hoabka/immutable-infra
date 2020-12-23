@@ -84,7 +84,7 @@ pipeline {
           cd "${WORK_SUB_DIR}"
           for role_name in "${ROLE_LIST[@]}"
           do
-            bash scripts/packer-build.sh $ROLE_NAME
+            bash scripts/packer-build.sh $role_name
           done
         '''
       }
