@@ -5,6 +5,9 @@ set -o pipefail
 function build_image() {
     local role_name=$1
     export ROLE_NAME=${role_name}
+    echo "ROLE NAME inside 1: $1"
+    echo "ROLE NAME inside 2: $2"
+    echo "ROLE NAME inside 3: $3"
     #Inspect script
     packer \
     inspect \
