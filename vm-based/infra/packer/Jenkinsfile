@@ -76,6 +76,7 @@ pipeline {
 
       steps {
         sh '''#!/usr/bin/env bash
+          echo "Shell Process ID: $$"
           set -o errexit
           readonly ROLE_LIST=(
             web
