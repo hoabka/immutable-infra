@@ -1,55 +1,11 @@
 ---
-- name: install jdk package
-  block:
-    - name: add gnupg key for zulu openjdk
-      apt_key:
-        id: 'B1998361219BD9C9'
-        keyserver: 'hkp://keyserver.ubuntu.com:80'
-        state: present
 
-    - name: add apt repository for zulu openjdk
-      apt_repository:
-        repo: 'deb http://repos.azulsystems.com/ubuntu stable main'
-        state: present
+- name: Packaging image
+  import_tasks: packer-imaging.yml
+  tags:
+    - packer-imaging
 
-    - name: install zulu openjdk packages ({{ zulu_openjdk_version }})
-      apt:
-        name: '{{ item }}'
-        state: present
-        update_cache: yes
-      loop: '{{ zulu_openjdk_packages }}'
-
-    - name: set JAVA_HOME system-wide environment variable
-      lineinfile:
-        dest: /etc/environment
-        line: 'JAVA_HOME="/usr/lib/jvm/zulu-{{ zulu_openjdk_version }}-amd64"'
-        insertafter: EOF
-        create: yes
-
-    - name: make jdk symbolic link
-      file:
-        src: '/usr/lib/jvm/zulu-{{ zulu_openjdk_version }}-amd64'
-        dest: {{ JAVA_HOME }}
-        state: link
-
-- name: Install the tomcat version {{ tomcat_version }}
-  get_url:
-    url: "https://downloads.apache.org/tomcat/tomcat-{{ tomcat_version[0] }}/v{{ tomcat_version }}/bin/apache-tomcat-{{ tomcat_version }}.tar.gz"
-    dest: /opt
-
-- name: Unarchive tomcat
-
-
-#Sample package
-- name: Download binary pakage
-  get_url:
-    url: https://osdn.net/projects/pal/downloads/17479/helloworld.war
-    dest: /etc/foo.conf
-    mode: '0440'
-
-
-- name: Setup tomcat service
-  template:
-    src: "tomcat.service.j2"
-    dest: "/lib/systemd/system/tomcat.service"
-
+- name: deployment
+  import_tasks: deployment.yml
+  tags:
+    - deployments

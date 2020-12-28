@@ -9,6 +9,6 @@
   tasks:
     - name: include packer-imaging roles
       include_role:
-        name: '{{ role_name }}'
+        name: 'web'
       tags:
         - packer-imaging
