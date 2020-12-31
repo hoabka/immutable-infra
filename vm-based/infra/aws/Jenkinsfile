@@ -77,6 +77,7 @@ pipeline {
       steps {
         sh '''#!/usr/bin/env bash
           echo "Shell Process ID: $$"
+          cd "${WORK_SUB_DIR}"
           bash scripts/init-deployment.bash
         '''
       }
