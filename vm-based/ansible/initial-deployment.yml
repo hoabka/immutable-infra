@@ -1,0 +1,36 @@
+---
+
+- name: gather facts
+  hosts: all
+
+  gather_facts: true
+  become: true
+  remote_user: '{{ tf_remote_user }}'
+
+- name: configure web
+  hosts: web
+
+  gather_facts: no
+  become: true
+  remote_user: '{{ tf_remote_user }}'
+
+  tasks:
+    - name: include web role
+      include_role:
+        name: web
+      tags:
+        - deployments
+
+- name: configure app
+  hosts: app
+
+  gather_facts: no
+  become: true
+  remote_user: '{{ tf_remote_user }}'
+
+  tasks:
+    - name: include app role
+      include_role:
+        name: app
+      tags:
+        - deployments

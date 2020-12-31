@@ -30,11 +30,6 @@ pipeline {
       defaultValue: 'latest',
       description: 'docker container image label name'
     )
-    string(
-      name: 'PACKER_HOME',
-      defaultValue: '/home/packer-user',
-      description: 'Home directory of packer user'
-    )
     choice(
       name: 'PACKER_REMOTE_USER',
       choices: [

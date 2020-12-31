@@ -67,9 +67,19 @@
 
 - name: Deploy binary package
   block:
+  - name: Remove unuse folders
+    file:
+      state: absent
+      path: "/opt/tomcat{{ tomcat_version[0] }}/webapps/{{ item }}"
+    with_items:
+      - docs
+      - examples
+      - host-manager
+      - manager
+
   - name: Download binary pakage
     get_url:
-      url: https://tomcat.apache.org/tomcat-7.0-doc/appdev/sample/sample.war
+      url: https://github.com/AKSarav/SampleWebApp/raw/master/dist/SampleWebApp.war
       dest: '/opt/tomcat{{ tomcat_version[0] }}/webapps/ROOT.war'
       owner: tomcat
       group: tomcat

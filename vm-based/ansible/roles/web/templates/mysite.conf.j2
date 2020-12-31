@@ -1,6 +1,6 @@
 upstream backend {
   {% for server_ip in app_server_node_ips -%}
-  server app-{{ '%02d' % loop.index }} {{ server_ip }}:{{ sca_backend_port }}
+  server  {{ server_ip }}:{{ app_backend_port }}; #app-{{ '%02d' % loop.index }}
   {% endfor %}
 }
 

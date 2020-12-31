@@ -1,4 +1,4 @@
 ---
 app_frontend_port: 80
 app_backend_port: 8080
-app_server_node_ips: "{{ groups['app'] | map('extract', hostvars, ['ansible_' + default_eth_name, 'ipv4', 'address']) | list }}"
+app_server_node_ips: "{{ groups['app'] | map('extract', hostvars, ['ansible_' + 'ens5', 'ipv4', 'address']) | list }}"
