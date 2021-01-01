@@ -83,4 +83,13 @@ pipeline {
       }
     }
   }
+  post {
+    failure {
+        sh '''#!/usr/bin/env bash
+          echo "Shell Process ID: $$"
+          cd "${WORK_SUB_DIR}"
+          bash scripts/post-cleanup.bash
+        '''
+        }
+    }
 }
