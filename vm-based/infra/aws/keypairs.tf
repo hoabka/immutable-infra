@@ -5,6 +5,7 @@ resource "tls_private_key" "bastion" {
 resource "local_file" "bastion" {
   filename          = "${local.private_keyname_path}/bastion.pem"
   sensitive_content = tls_private_key.bastion.private_key_pem
+  file_permission   = "0400"
 }
 
 resource "aws_key_pair" "bastion" {
@@ -19,6 +20,7 @@ resource "tls_private_key" "web" {
 resource "local_file" "web" {
   filename          = "${local.private_keyname_path}/web.pem"
   sensitive_content = tls_private_key.web.private_key_pem
+  file_permission   = "0400"
 }
 
 resource "aws_key_pair" "web" {
@@ -33,6 +35,7 @@ resource "tls_private_key" "app" {
 resource "local_file" "app" {
   filename          = "${local.private_keyname_path}/app.pem"
   sensitive_content = tls_private_key.app.private_key_pem
+  file_permission   = "0400"
 }
 
 resource "aws_key_pair" "app" {
