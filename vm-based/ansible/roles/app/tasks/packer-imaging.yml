@@ -76,7 +76,7 @@
       - examples
       - host-manager
       - manager
-      - ROOT*
+      - ROOT
 
   - name: Download binary pakage
     get_url:
