@@ -4,6 +4,6 @@ date
 
 ansible-playbook \
   --inventory-file ansible-hosts.yml \
-  --tags "deployment" \
+  --tags "deployments" \
     "../../ansible/initial-deployment.yml" \
     ;
