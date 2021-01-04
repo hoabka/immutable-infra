@@ -4,13 +4,6 @@
 #Restart tomcat service
 - name: Temp block
   block:
-    - name: Download binary pakage
-      get_url:
-        url: https://github.com/AKSarav/SampleWebApp/raw/master/dist/SampleWebApp.war
-        dest: '/opt/tomcat{{ tomcat_version[0] }}/webapps/ROOT.war'
-        owner: tomcat
-        group: tomcat
-
     - name: Start tomcat service
       systemd:
         state: restarted
