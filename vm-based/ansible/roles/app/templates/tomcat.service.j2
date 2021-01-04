@@ -13,8 +13,8 @@ WorkingDirectory=/opt/tomcat{{ tomcat_version[0] }}
 Environment="JAVA_HOME={{ JAVA_HOME }}"
 Environment="JAVA_OPTS=-Djava.security.egd=file:///dev/urandom"
 
-Environment="CATALINA_BASE=/opt/tomcat{{ tomcat_version[0] }}/"
-Environment="CATALINA_HOME=/opt/tomcat{{ tomcat_version[0] }}/"
+Environment="CATALINA_BASE=/opt/tomcat{{ tomcat_version[0] }}"
+Environment="CATALINA_HOME=/opt/tomcat{{ tomcat_version[0] }}"
 Environment="CATALINA_OPTS=-Xms512M -Xmx1024M -server -XX:+UseParallelGC"
 
 ExecStart=/opt/tomcat{{ tomcat_version[0] }}/bin/startup.sh
