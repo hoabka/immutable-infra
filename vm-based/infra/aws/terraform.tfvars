@@ -19,9 +19,9 @@ private_subnets_cidr    = {
 }
 
 bastion_instance_type = "t3.micro"
-number_web_instances  = 2
+number_web_instances  = 1
 web_instance_type     = "t3.micro"
-number_app_instances  = 2
+number_app_instances  = 1
 app_instance_type     = "t3.micro"
 
 ssh_allow_cidr        = "0.0.0.0/0"

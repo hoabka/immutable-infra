@@ -9,7 +9,7 @@ Host *
   ServerAliveCountMax 5
 
 # for bastion node
-Host bastion-01
+Host bastion-01 ${bastion_public_ip}
   HostName ${bastion_public_ip}
   User ${tf_remote_user}
   StrictHostKeyChecking no
