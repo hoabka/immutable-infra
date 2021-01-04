@@ -1,12 +1,12 @@
 ![alt text](https://github.com/hoabka/immutable-infra/blob/main/res/vm-based-flow.JPG)
 
 ## Objectives
-- In this example, I'm using immutable infra flow pattern with **Packer**, **Terraform**, **Ansible** and **Jenkins** to build simple webapp application (nginx + simple tomcat webapp).
+ In this example, I'm using immutable infra flow pattern with **Packer**, **Terraform**, **Ansible** and **Jenkins** to build simple webapp application (nginx + simple tomcat webapp).
 
-- What will you learn from this example
--- How to use **Jenkinfile**, Docker-based Jenkin Agents
--- How to use Infrastructure as Code tool like **Terraform** and **Packer**
--- How to use Config Management tool like **Ansible** with config rendered from **Terraform**
+ What will you learn from this example
+- How to use **Jenkinfile**, Docker-based Jenkin Agents
+- How to use Infrastructure as Code tool like **Terraform** and **Packer**
+- How to use Config Management tool like **Ansible** with config rendered from **Terraform**
 
 ## Introduction
 - This example includes 3 main components: bastion, web (Nginx) behind an ALB, Tomcat (SampleWebApp).
