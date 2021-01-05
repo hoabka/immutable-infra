@@ -64,3 +64,8 @@
 ![alt text](https://github.com/hoabka/immutable-infra/blob/main/res/sample-webapp-page.JPG)
 
 
+## 4. Cleanup
+- Run infra-deployment job with **cleanup** parameter
+
+![alt text](https://github.com/hoabka/immutable-infra/blob/main/res/cleanup.JPG)
+
