@@ -25,6 +25,11 @@ pipeline {
   }
 
   parameters {
+    choice(
+      choices: ['deployment' , 'cleanup'],
+      description: '',
+      name: 'REQUESTED_ACTION'
+    )
     string(
       name: 'IMG_LABEL',
       defaultValue: 'latest',
@@ -55,6 +60,10 @@ pipeline {
 
   stages {
     stage('terraform-apply') {
+      when {
+                // Deployment
+                expression { params.REQUESTED_ACTION == 'deployment' }
+      }
       options {
         timeout(time: 10, unit: 'MINUTES')
       }
@@ -70,8 +79,12 @@ pipeline {
     }
 
     stage('init-deployment') {
+    when {
+                // Deployment
+                expression { params.REQUESTED_ACTION == 'deployment' }
+      }
       options {
-        timeout(time: 150, unit: 'MINUTES')
+        timeout(time: 10, unit: 'MINUTES')
       }
 
       steps {
@@ -82,7 +95,26 @@ pipeline {
         '''
       }
     }
+
+    stage('cleanup') {
+    when {
+         // Cleanup
+         expression { params.REQUESTED_ACTION == 'cleanup' }
+      }
+      options {
+        timeout(time: 10, unit: 'MINUTES')
+      }
+
+      steps {
+        sh '''#!/usr/bin/env bash
+          echo "Shell Process ID: $$"
+          cd "${WORK_SUB_DIR}"
+          bash scripts/post-cleanup.bash
+        '''
+      }
+    }
   }
+
   post {
     failure {
         sh '''#!/usr/bin/env bash
