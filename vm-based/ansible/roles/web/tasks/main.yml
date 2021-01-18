@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ---
 - name: Install the nginx version {{ nginx_version }}
   apt:
@@ -13,3 +14,16 @@
   template:
     src: mysite.conf
     dest: /etc/nginx/sites-enabled/mysite.conf
+=======
+---
+
+- name: Packaging image
+  import_tasks: packer-imaging.yml
+  tags:
+    - packer-imaging
+
+- name: deployment
+  import_tasks: deployment.yml
+  tags:
+    - deployments
+>>>>>>> upstream/main

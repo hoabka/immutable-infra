@@ -1,0 +1,11 @@
+upstream backend {
+  {% for server_ip in app_server_node_ips -%}
+  server  {{ server_ip }}:{{ app_backend_port }}; #app-{{ '%02d' % loop.index }}
+  {% endfor %}
+}
+
+server {
+    location / {
+        proxy_pass http://backend;
+    }
+}

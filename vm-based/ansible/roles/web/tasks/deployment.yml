@@ -1,0 +1,11 @@
+---
+- name: Render nginx config
+  template:
+    src: mysite.conf.j2
+    dest: /etc/nginx/sites-enabled/mysite.conf
+
+- name: Restart nginx
+  systemd:
+    state: restarted
+    daemon_reload: yes
+    name: nginx.service

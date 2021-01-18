@@ -1,0 +1,11 @@
+---
+#Setup DB config files
+
+#Restart tomcat service
+- name: Restast tomcat
+  block:
+  - name: Start tomcat service
+    systemd:
+      state: restarted
+      daemon_reload: yes
+      name: tomcat.service

@@ -1,0 +1,15 @@
+---
+- name: Install nginx latest version
+  apt:
+    name: nginx
+    state: present
+
+- name: Remove default nginx config
+  file:
+    name: /etc/nginx/sites-enabled/default
+    state: absent
+
+- name: Setup nginx service
+  template:
+    src: nginx.service.j2
+    dest: /lib/systemd/system/nginx.service

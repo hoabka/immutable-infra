@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ---
 zulu_openjdk_version: '8'
 zulu_openjdk_packages:
@@ -7,3 +8,14 @@ zulu_openjdk_packages:
 JAVA_HOME: '/usr/local/java'
 tomcat_version: 8
 
+=======
+---
+zulu_openjdk_version: '8'
+zulu_openjdk_packages:
+  - 'zulu-{{ zulu_openjdk_version }}'
+  - 'zulu{{ zulu_openjdk_version }}'
+
+JAVA_HOME: '/usr/local/java'
+tomcat_version: '8.5.61'
+
+>>>>>>> upstream/main

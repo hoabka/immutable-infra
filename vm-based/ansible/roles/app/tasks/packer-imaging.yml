@@ -1,0 +1,96 @@
+---
+- name: install jdk package
+  block:
+    - name: add gnupg key for zulu openjdk
+      apt_key:
+        id: 'B1998361219BD9C9'
+        keyserver: 'hkp://keyserver.ubuntu.com:80'
+        state: present
+
+    - name: add apt repository for zulu openjdk
+      apt_repository:
+        repo: 'deb http://repos.azulsystems.com/ubuntu stable main'
+        state: present
+
+    - name: install zulu openjdk packages ({{ zulu_openjdk_version }})
+      apt:
+        name: '{{ item }}'
+        state: present
+        update_cache: yes
+      loop: '{{ zulu_openjdk_packages }}'
+
+    - name: set JAVA_HOME system-wide environment variable
+      lineinfile:
+        dest: /etc/environment
+        line: 'JAVA_HOME="/usr/lib/jvm/zulu-{{ zulu_openjdk_version }}-amd64"'
+        insertafter: EOF
+        create: yes
+
+    - name: make jdk symbolic link
+      file:
+        src: '/usr/lib/jvm/zulu-{{ zulu_openjdk_version }}-amd64'
+        dest: '{{ JAVA_HOME }}'
+        state: link
+
+- name: Install tomcat
+  block:
+    - name: Create user tomcat
+      user:
+        name: tomcat
+
+    - name: Install the tomcat version {{ tomcat_version }}
+      get_url:
+        url: "https://downloads.apache.org/tomcat/tomcat-{{ tomcat_version[0] }}/v{{ tomcat_version }}/bin/apache-tomcat-{{ tomcat_version }}.tar.gz"
+        dest: /var/cache
+
+    - name: Unarchive tomcat
+      unarchive:
+        src: '/var/cache/apache-tomcat-{{ tomcat_version }}.tar.gz'
+        dest: /opt
+        owner: tomcat
+        group: tomcat
+        remote_src: yes
+
+    - name: Create solflink
+      file:
+        src: '/opt/apache-tomcat-{{ tomcat_version }}'
+        dest: '/opt/tomcat{{ tomcat_version[0] }}'
+        state: link
+        owner: tomcat
+        group: tomcat
+
+    - name: Setup tomcat service
+      template:
+        src: "tomcat.service.j2"
+        dest: "/lib/systemd/system/tomcat.service"
+  
+
+- name: Deploy binary package
+  block:
+  - name: Remove unuse folders
+    file:
+      state: absent
+      path: "/opt/tomcat{{ tomcat_version[0] }}/webapps/{{ item }}"
+    with_items:
+      - docs
+      - examples
+      - host-manager
+      - manager
+      - ROOT
+
+  - name: Download binary pakage
+    get_url:
+      url: https://github.com/AKSarav/SampleWebApp/raw/master/dist/SampleWebApp.war
+      dest: '/opt/tomcat{{ tomcat_version[0] }}/webapps/ROOT.war'
+      owner: tomcat
+      group: tomcat
+
+  - name: Start tomcat service
+    systemd:
+      state: restarted
+      daemon_reload: yes
+      name: tomcat.service
+
+
+
+
