@@ -1,0 +1,29 @@
+all:
+  hosts:
+    bastion-01:
+      ansible_host: 44.235.201.79
+      ansible_user: ubuntu
+      ansible_ssh_common_args: '-F ssh.conf -o StrictHostKeyChecking=no'
+      ansible_python_interpreter: /usr/bin/env python3
+    web-01:
+      ansible_host: 10.1.10.68
+      ansible_user: ubuntu
+      ansible_ssh_common_args: '-F ssh.conf -o StrictHostKeyChecking=no'
+      ansible_python_interpreter: /usr/bin/env python3
+    app-01:
+      ansible_host: 10.1.10.248
+      ansible_user: ubuntu
+      ansible_ssh_common_args: '-F ssh.conf -o StrictHostKeyChecking=no'
+      ansible_python_interpreter: /usr/bin/env python3
+
+bastion:
+  hosts:
+    bastion-01:
+
+web:
+  hosts:
+    web-01:
+
+app:
+  hosts:
+    app-01:
