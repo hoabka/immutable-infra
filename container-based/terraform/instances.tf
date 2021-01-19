@@ -4,6 +4,7 @@ resource "aws_instance" "bastion" {
   availability_zone = local.target_azs[0]
   subnet_id         = aws_subnet.public[0].id
   key_name          = aws_key_pair.bastion.key_name
+  iam_instance_profile = module.eks.eks_manage_instance_profile
 
   vpc_security_group_ids = [aws_security_group.bastion.id]
 

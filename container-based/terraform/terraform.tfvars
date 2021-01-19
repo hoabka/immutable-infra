@@ -1,7 +1,7 @@
 account_id = "633834615594"
-project    = "packer-demo"
+project    = "container-based-cicd"
 env        = "demo"
-profile    = "packer-demo"
+profile    = "svmc"
 region     = "us-west-2"
 
 vpc_cidr               = "10.1.0.0/16"
@@ -19,9 +19,14 @@ private_subnets_cidr    = {
 }
 
 bastion_instance_type = "t3.micro"
-number_web_instances  = 1
-web_instance_type     = "t3.micro"
-number_app_instances  = 1
-app_instance_type     = "t3.micro"
+
+eks_cluster_name       = "eks"
+eks_cluster_version    = "1.18"
+eks_node_instance_type = "t3.medium"
+eks_autoscaling        = {
+    "desired" = 2
+    "min"     = 2
+    "max"     = 5
+}
 
 ssh_allow_cidr        = "0.0.0.0/0"
