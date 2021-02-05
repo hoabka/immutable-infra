@@ -15,7 +15,7 @@ module "eks" {
   sg_eks_node_id       = aws_security_group.sg-eks-node.id
   sg_admin_id          = aws_security_group.admin.id
 
-  eks_node_instance_type = "t2.large"
+  eks_node_instance_type = var.eks_node_instance_type
   eks_autoscaling        = var.eks_autoscaling
   spinnaker_managed      = true
 }

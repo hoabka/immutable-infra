@@ -17,3 +17,16 @@ resource "local_file" "update_kubeconfig" {
   content  = data.template_file.kube-config.rendered
   filename = "${path.cwd}/${var.eks_cluster_name}/update-kubeconfig.sh"
 }
+
+resource "null_resource" "apply_kubeconfig" {
+
+  #Convert DOS to Unix in case of Linux Subsystem on Window 10
+  provisioner "local-exec" {
+    command = "sed -i 's/\r$//' ${path.cwd}/${var.eks_cluster_name}/update-kubeconfig.sh"
+  }
+
+  #
+  provisioner "local-exec" {
+    command = "/bin/bash ${path.cwd}/${var.eks_cluster_name}/update-kubeconfig.sh"
+  }
+}

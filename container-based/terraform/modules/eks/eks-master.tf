@@ -1,5 +1,5 @@
 resource "aws_eks_cluster" "eks-cluster" {
-  name = "ipa-cn-${var.env}-eks-cluster"
+  name = var.eks_cluster_name
   role_arn = aws_iam_role.eks-master.arn
 
 

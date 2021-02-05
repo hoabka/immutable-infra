@@ -20,7 +20,7 @@ private_subnets_cidr    = {
 
 bastion_instance_type = "t3.micro"
 
-eks_cluster_name       = "eks"
+eks_cluster_name       = "demo-eks-cluster"
 eks_cluster_version    = "1.18"
 eks_node_instance_type = "t3.medium"
 eks_autoscaling        = {

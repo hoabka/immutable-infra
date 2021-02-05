@@ -69,6 +69,8 @@ resource "aws_subnet" "public" {
 
   tags = merge({
     Name = "public-subnet-${format("%02d", count.index + 1)}"
+    "kubernetes.io/role/elb" = "1"
+    "kubernetes.io/cluster/${var.eks_cluster_name}" = "shared"
     },
   local.common_tags)
 }

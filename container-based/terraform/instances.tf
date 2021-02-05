@@ -1,4 +1,4 @@
-resource "aws_instance" "bastion" {
+/*resource "aws_instance" "bastion" {
   ami               = data.aws_ami.bastion.id
   instance_type     = var.bastion_instance_type
   availability_zone = local.target_azs[0]
@@ -18,9 +18,9 @@ resource "aws_instance" "bastion" {
   tags = {
     Name = "bastion-01"
   }
-}
-
+}*/
+/*
 resource "aws_eip_association" "bastion" {
   allocation_id = aws_eip.bastion.id
   instance_id   = aws_instance.bastion.id
-}
+}*/

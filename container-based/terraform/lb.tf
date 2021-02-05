@@ -1,3 +1,4 @@
+/*
 resource "aws_lb" "web-lb" {
   load_balancer_type = "application"
   name = "web-lb"
@@ -17,3 +18,4 @@ resource "aws_lb" "web-lb" {
     Name = "web-lb"
   }
 }
+*/

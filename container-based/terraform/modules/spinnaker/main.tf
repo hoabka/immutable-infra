@@ -86,7 +86,7 @@ set -ex \
 && hal -q config provider kubernetes account add my-k8s-v2-account --provider-version v2 --context $(kubectl config current-context) \
 && hal -q config version edit --version $${spinnaker_version} \
 && hal -q config storage s3 edit --bucket $${s3bucket} --assume-role $${managed_role_arn} \
-&& hal -q config storage edit --type s3
+&& hal -q config storage edit --type s3 \
 && hal -q deploy apply
 EOF
 

@@ -3,6 +3,7 @@ data "aws_region" "current" {
 locals {
   is_china = substr(data.aws_region.current.name, 0, 2) == "cn" ? true : false
   arn_aws  = local.is_china ? "aws-cn" : "aws"
+  suffix_domain = local.is_china ? ".cn" : ""
 }
 
 resource "aws_iam_role" "eks-master" {
@@ -47,7 +48,7 @@ resource "aws_iam_role" "eks-node" {
       {
         "Effect" : "Allow",
         "Principal" : {
-          "Service" : "ec2.amazonaws.com.cn"
+          "Service" : "ec2.amazonaws.com${local.suffix_domain}"
         },
         "Action" : "sts:AssumeRole"
       }
@@ -88,7 +89,7 @@ resource "aws_iam_role" "eks-manage-role" {
       {
         "Effect" : "Allow",
         "Principal" : {
-          "Service" : "ec2.amazonaws.com.cn"
+          "Service" : "ec2.amazonaws.com${local.suffix_domain}"
         },
         "Action" : "sts:AssumeRole"
       }
