@@ -1,3 +1,33 @@
+<<<<<<< HEAD
+[Unit]
+Description=Tomcat - instance %i
+After=syslog.target network.target
+
+[Service]
+Type=forking
+
+User=tomcat
+Group=tomcat
+
+WorkingDirectory=/var/tomcat/%i
+
+Environment="JAVA_HOME={{ JAVA_HOME }}"
+Environment="JAVA_OPTS=-Djava.security.egd=file:///dev/urandom"
+
+Environment="CATALINA_PID=/var/tomcat/%i/run/tomcat.pid"
+Environment="CATALINA_BASE=/var/tomcat/%i/"
+Environment="CATALINA_HOME=/opt/tomcat/"
+Environment="CATALINA_OPTS=-Xms512M -Xmx1024M -server -XX:+UseParallelGC"
+
+ExecStart=/usr/share/tomcat8/bin/startup.sh
+ExecStop=/usr/share/tomcat8/bin/shutdown.sh
+
+#RestartSec=10
+#Restart=always
+
+[Install]
+WantedBy=multi-user.target
+=======
 [Unit]
 Description=Tomcat - instance %i
 After=syslog.target network.target
@@ -25,3 +55,4 @@ ExecStop=/opt/tomcat{{ tomcat_version[0] }}/bin/shutdown.sh
 
 [Install]
 WantedBy=multi-user.target
+>>>>>>> upstream/main

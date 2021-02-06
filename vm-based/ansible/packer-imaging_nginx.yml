@@ -1,0 +1,14 @@
+---
+
+- name: install packages
+  hosts: all
+  gather_facts: yes
+  become: true
+  remote_user: '{{ remote_user }}'
+
+  tasks:
+    - name: include packer-imaging roles
+      include_role:
+        name: '{{ role_name }}'
+      tags:
+        - packer-imaging
