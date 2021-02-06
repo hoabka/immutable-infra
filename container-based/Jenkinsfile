@@ -62,7 +62,7 @@ pipeline {
       }
 
       steps {
-        archiveArtifacts artifacts: 'build.properties'
+        archiveArtifacts artifacts: 'container-based/build.properties'
       }
     }
   }
