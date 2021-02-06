@@ -1,31 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  namespace: game-2048
-  name: service-2048
+  name: samplewebapp
 spec:
   ports:
     - port: 80
-      targetPort: 80
+      targetPort: 8080
       protocol: TCP
   type: NodePort
   selector:
-    app.kubernetes.io/name: app-2048
----
-apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  namespace: game-2048
-  name: ingress-2048
-  annotations:
-    kubernetes.io/ingress.class: alb
-    alb.ingress.kubernetes.io/scheme: internet-facing
-    alb.ingress.kubernetes.io/target-type: ip
-spec:
-  rules:
-    - http:
-        paths:
-          - path: /*
-            backend:
-              serviceName: service-2048
-              servicePort: 80
+    app.kubernetes.io/name: simplewebapp
