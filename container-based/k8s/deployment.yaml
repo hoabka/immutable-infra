@@ -13,7 +13,7 @@ spec:
         app.kubernetes.io/name: samplewebapp
     spec:
       containers:
-      - image: '${#stage("Jenkins")["context"]["version"]}'
+      - image: '${#stage("Jenkins")["context"]["IMAGE_NAME"]}'
         imagePullPolicy: Always
         name: samplewebapp
         ports:
