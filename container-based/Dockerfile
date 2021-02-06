@@ -54,7 +54,7 @@ RUN rm -rf /opt/tomcat/webapps/*
 
 
 WORKDIR /opt/tomcat/webapps
-RUN curl -O -L ${artifactURL} --output ROOT.war
+RUN curl -L -o ROOT.war ${artifactURL}
 
 EXPOSE 8080
 
