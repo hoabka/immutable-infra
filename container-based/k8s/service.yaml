@@ -9,4 +9,4 @@ spec:
       protocol: TCP
   type: LoadBalancer
   selector:
-    app.kubernetes.io/name: simplewebapp
+    app.kubernetes.io/name: samplewebapp
