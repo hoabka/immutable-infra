@@ -1,5 +1,5 @@
   
-![alt text](https://github.com/hoabka/immutable-infra/blob/master/res/vm-based-flow.JPG)    
+![alt text](https://github.com/hoabka/immutable-infra/blob/master/res/container-based-flow.JPG "CI/CD workflow")    
     
 ## Objectives    
  In this example, I'm using immutable infra flow pattern with **Spinnaker**, **EKS** and **Jenkins** to build simple webapp application (simple tomcat webapp).    
@@ -51,20 +51,20 @@ $ export KUBECONFIG=./config-demo-eks-cluster
 ### 2.1. Setup Jenkins job 
 - Create  **spinnaker-demo** job    
     
-![alt text](https://github.com/hoabka/immutable-infra/blob/master/res/spinnaker-demo-jenkin-job.JPG)    
+![alt text](https://github.com/hoabka/immutable-infra/blob/master/res/spinnaker-demo-jenkin-job.JPG "spinnaker-demo jenkin job")    
     
     
 ### 2.2. Create Spinnaker Application and Pipeline  
 - Create  **Application**   
- ![alt text](https://github.com/hoabka/immutable-infra/blob/master/res/spinnaker-application.JPG)    
+ ![alt text](https://github.com/hoabka/immutable-infra/blob/master/res/spinnaker-application.JPG "Spinnaker Application")    
     
 - Create Pipelines  
   1. Deployment pipeline  
-![alt text](https://github.com/hoabka/immutable-infra/blob/master/res/spinnaker-deployment-pipeline.JPG)    
+![alt text](https://github.com/hoabka/immutable-infra/blob/master/res/spinnaker-deployment-pipeline.JPG "Spinnaker Deployment pipeline")    
    - Choose **Edit as JSON** and copy/paste content from [spinnaker/deployment_pipeline.json](https://github.com/hoabka/immutable-infra/blob/master/container-based/spinnaker/deployment_pipeline.json)
    
   2. Service pipeline  
-   ![alt text](https://github.com/hoabka/immutable-infra/blob/master/res/spinnaker-service-pipeline.JPG)  
+   ![alt text](https://github.com/hoabka/immutable-infra/blob/master/res/spinnaker-service-pipeline.JPG "Spinnaker Service Pipeline")  
   - Choose **Edit as JSON** and copy/paste content from [spinnaker/service_pipeline.json](https://github.com/hoabka/immutable-infra/blob/master/container-based/spinnaker/service_pipeline.json)
 
 ## 3. Deployment  
@@ -80,7 +80,7 @@ $ kubectl get svc -l "app=samplewebapp" \
     
 - Visit to **lb_dns**, it should show the **SampleWebApp** page    
     
-![alt text](https://github.com/hoabka/immutable-infra/blob/master/res/sample-webapp-page.JPG)    
+![alt text](https://github.com/hoabka/immutable-infra/blob/master/res/sample-webapp-page.JPG "Sample  Java WebApp")    
     
     
 ## 4. Cleanup 
