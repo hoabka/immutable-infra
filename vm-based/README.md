@@ -1,4 +1,4 @@
-![alt text](https://github.com/hoabka/immutable-infra/blob/main/res/vm-based-flow.JPG)
+![alt text](https://github.com/hoabka/immutable-infra/blob/master/res/vm-based-flow.JPG)
 
 ## Objectives
  In this example, I'm using immutable infra flow pattern with **Packer**, **Terraform**, **Ansible** and **Jenkins** to build simple webapp application (nginx + simple tomcat webapp).
@@ -31,41 +31,41 @@
 - To work with AWS, we need to have credential information.
 - To be simple, I use ACCESS  and SECRET KEY (equivalent to **PACKER_AWS_ACCESS_KEY** and **PACKER_AWS_SECRET_KEY**) 
 
-![alt text](https://github.com/hoabka/immutable-infra/blob/main/res/jenkins-credential.JPG)
+![alt text](https://github.com/hoabka/immutable-infra/blob/master/res/jenkins-credential.JPG)
 
 ## 2. How to deploy
 ### 2.1. Packaging images with Packer
 - Create  **Packaging-Image** job
 
-![alt text](https://github.com/hoabka/immutable-infra/blob/main/res/packaging-image.JPG)
+![alt text](https://github.com/hoabka/immutable-infra/blob/master/res/packaging-image.JPG)
 
-- Run **Packaging-Image** job to build AMI
+- Run **Packaging-Image** job to build AMI, n   
 
-![alt text](https://github.com/hoabka/immutable-infra/blob/main/res/packaging-image-build.JPG)
+![alt text](https://github.com/hoabka/immutable-infra/blob/master/res/packaging-image-build.JPG)
 
 ### 2.2. Infra Deployment
 - Create  **Infra-deployment** job
 
-![alt text](https://github.com/hoabka/immutable-infra/blob/main/res/infra-deployment.JPG)
+![alt text](https://github.com/hoabka/immutable-infra/blob/master/res/infra-deployment.JPG)
 
 - Run **Infra-deployment** job to provision infra and deploy application
 
-![alt text](https://github.com/hoabka/immutable-infra/blob/main/res/infra-deployment-build.JPG)
+![alt text](https://github.com/hoabka/immutable-infra/blob/master/res/infra-deployment-build.JPG)
 
 
 ## 3. Verify deployment
 - Get **lb_dns** from Jenkin Output after running **infra-deployment** job
 
-![alt text](https://github.com/hoabka/immutable-infra/blob/main/res/alb-domain-output.JPG)
+![alt text](https://github.com/hoabka/immutable-infra/blob/master/res/alb-domain-output.JPG)
 
 
 - Visit to **lb_dns**, it should show the **SampleWebApp** page
 
-![alt text](https://github.com/hoabka/immutable-infra/blob/main/res/sample-webapp-page.JPG)
+![alt text](https://github.com/hoabka/immutable-infra/blob/master/res/sample-webapp-page.JPG)
 
 
 ## 4. Cleanup
 - Run infra-deployment job with **cleanup** parameter
 
-![alt text](https://github.com/hoabka/immutable-infra/blob/main/res/cleanup.JPG)
+![alt text](https://github.com/hoabka/immutable-infra/blob/master/res/cleanup.JPG)
 

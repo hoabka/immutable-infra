@@ -1,0 +1,81 @@
+{
+  "expectedArtifacts": [
+    {
+      "defaultArtifact": {
+        "artifactAccount": "hoabka",
+        "id": "3972712f-e7c4-42f7-95bb-12f3a64ec63b",
+        "name": "container-based/k8s/deployment.yaml",
+        "reference": "https://api.github.com/repos/hoabka/immutable-infra/contents/container-based/k8s/deployment.yaml",
+        "type": "github/file",
+        "version": "master"
+      },
+      "displayName": "app-deployment.yaml",
+      "id": "5a1db75b-c0db-4358-8ee1-b079e532e50b",
+      "matchArtifact": {
+        "artifactAccount": "hoabka",
+        "customKind": true,
+        "id": "eac64a14-6335-4aa8-86c6-7d667fa4db3e",
+        "name": "container-based/k8s/deployment.yaml",
+        "type": "github/file"
+      },
+      "useDefaultArtifact": true,
+      "usePriorArtifact": false
+    }
+  ],
+  "keepWaitingPipelines": false,
+  "lastModifiedBy": "anonymous",
+  "limitConcurrent": true,
+  "spelEvaluator": "v4",
+  "stages": [
+    {
+      "continuePipeline": false,
+      "failPipeline": true,
+      "job": "spinnaker-demo",
+      "master": "my-jenkins-master",
+      "name": "Jenkins",
+      "parameters": {},
+      "propertyFile": "build.properties",
+      "refId": "1",
+      "requisiteStageRefIds": [],
+      "type": "jenkins"
+    },
+    {
+      "account": "demo-eks-spinnaker",
+      "cloudProvider": "kubernetes",
+      "manifestArtifactId": "5a1db75b-c0db-4358-8ee1-b079e532e50b",
+      "moniker": {
+        "app": "spinnakerdemo"
+      },
+      "name": "Deploy (Manifest)",
+      "namespaceOverride": "",
+      "refId": "2",
+      "requisiteStageRefIds": [
+        "1"
+      ],
+      "skipExpressionEvaluation": false,
+      "source": "artifact",
+      "trafficManagement": {
+        "enabled": false,
+        "options": {
+          "enableTraffic": false,
+          "services": []
+        }
+      },
+      "type": "deployManifest"
+    }
+  ],
+  "triggers": [
+    {
+      "branch": "master",
+      "enabled": true,
+      "expectedArtifactIds": [
+        "5a1db75b-c0db-4358-8ee1-b079e532e50b"
+      ],
+      "project": "hoabka",
+      "slug": "immutable-infra",
+      "source": "github",
+      "type": "git"
+    }
+  ],
+  "updateTs": "1612597661000"
+}

@@ -1,5 +1,9 @@
-/*
-output "lb_dns" {
-  value = aws_lb.web-lb.dns_name
-  description = "Web LB domain name"
-}*/
+output "eks_cluster_name" {
+  value = var.eks_cluster_name
+  description = "EKS cluster name"
+}
+
+output "ecr_url" {
+  value = aws_ecr_repository.ecr.repository_url
+  description = "ECR url"
+}

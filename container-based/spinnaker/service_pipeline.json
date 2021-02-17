@@ -1,0 +1,65 @@
+{
+  "expectedArtifacts": [
+    {
+      "defaultArtifact": {
+        "artifactAccount": "hoabka",
+        "id": "023c234a-ff7c-4cb4-a4d3-0c470d2f95ef",
+        "name": "container-based/k8s/service.yaml",
+        "reference": "https://api.github.com/repos/hoabka/immutable-infra/contents/container-based/k8s/service.yaml",
+        "type": "github/file"
+      },
+      "displayName": "app-service.yaml",
+      "id": "3d1d1d46-3c07-4e47-af79-10e8c7d8ad27",
+      "matchArtifact": {
+        "artifactAccount": "hoabka",
+        "customKind": true,
+        "id": "94bad586-ee57-49c9-aabe-07dcb45e5f35",
+        "name": "container-based/k8s/service.yaml",
+        "type": "github/file"
+      },
+      "useDefaultArtifact": true,
+      "usePriorArtifact": false
+    }
+  ],
+  "keepWaitingPipelines": false,
+  "lastModifiedBy": "anonymous",
+  "limitConcurrent": true,
+  "spelEvaluator": "v4",
+  "stages": [
+    {
+      "account": "demo-eks-spinnaker",
+      "cloudProvider": "kubernetes",
+      "manifestArtifactId": "3d1d1d46-3c07-4e47-af79-10e8c7d8ad27",
+      "moniker": {
+        "app": "spinnakerdemo"
+      },
+      "name": "Deploy (Manifest)",
+      "refId": "1",
+      "requisiteStageRefIds": [],
+      "skipExpressionEvaluation": false,
+      "source": "artifact",
+      "trafficManagement": {
+        "enabled": false,
+        "options": {
+          "enableTraffic": false,
+          "services": []
+        }
+      },
+      "type": "deployManifest"
+    }
+  ],
+  "triggers": [
+    {
+      "branch": "master",
+      "enabled": true,
+      "expectedArtifactIds": [
+        "3d1d1d46-3c07-4e47-af79-10e8c7d8ad27"
+      ],
+      "project": "hoabka",
+      "slug": "immutable-infra",
+      "source": "github",
+      "type": "git"
+    }
+  ],
+  "updateTs": "1612593709000"
+}

@@ -2,6 +2,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: samplewebapp
+  labels:
+    environment: demo
+    app: samplewebapp
 spec:
   selector:
     matchLabels:

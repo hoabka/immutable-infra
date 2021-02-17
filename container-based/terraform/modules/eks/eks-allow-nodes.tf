@@ -18,7 +18,7 @@ resource "local_file" "update_kubeconfig" {
   filename = "${path.cwd}/${var.eks_cluster_name}/update-kubeconfig.sh"
 }
 
-resource "null_resource" "apply_kubeconfig" {
+/*resource "null_resource" "apply_kubeconfig" {
 
   #Convert DOS to Unix in case of Linux Subsystem on Window 10
   provisioner "local-exec" {
@@ -29,4 +29,4 @@ resource "null_resource" "apply_kubeconfig" {
   provisioner "local-exec" {
     command = "/bin/bash ${path.cwd}/${var.eks_cluster_name}/update-kubeconfig.sh"
   }
-}
+}*/
