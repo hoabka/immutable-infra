@@ -24,4 +24,8 @@ variable "eks_autoscaling" {
     "max"     = 5
   }
 }
+variable "ecr_name" {
+  default = "samplewebapp"
+}
 variable "ssh_allow_cidr" {}
+

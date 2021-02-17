@@ -30,44 +30,6 @@ resource "aws_security_group" "admin" {
   vpc_id = aws_vpc.demo-vpc.id
   description = "Management security groups"
 }
-
-resource "aws_security_group_rule" "admin-in" {
-  from_port = 22
-  protocol = "TCP"
-  security_group_id = aws_security_group.admin.id
-  to_port = 22
-  type = "ingress"
-  source_security_group_id = aws_security_group.bastion.id
-  description = "For ssh access from bastion"
-}
-
-resource "aws_security_group_rule" "admin-out" {
-  from_port = 0
-  protocol = "-1"
-  security_group_id = aws_security_group.admin.id
-  to_port = 0
-  type = "egress"
-  cidr_blocks = ["0.0.0.0/0"]
-  description = "All traffic outbound"
-}
-
-
-resource "aws_security_group" "lb-external" {
-  name = "sg_alb"
-  vpc_id = aws_vpc.demo-vpc.id
-  description = "LB security groups"
-}
-
-resource "aws_security_group_rule" "lb-allow-http" {
-  from_port = 80
-  protocol = "TCP"
-  security_group_id = aws_security_group.lb-external.id
-  to_port = 80
-  type = "ingress"
-  cidr_blocks = ["0.0.0.0/0"]
-  description = "Allow access from external"
-}
-
 #For EKS master and nodes
 
 resource "aws_security_group" "sg-eks-master" {
