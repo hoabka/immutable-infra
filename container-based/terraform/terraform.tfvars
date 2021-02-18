@@ -1,7 +1,7 @@
 account_id = "633834615594"
 project    = "container-based-cicd"
 env        = "demo"
-profile    = "svmc"
+profile    = "demo"
 region     = "us-west-2"
 
 vpc_cidr               = "10.1.0.0/16"
